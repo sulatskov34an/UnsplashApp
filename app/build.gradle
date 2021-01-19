@@ -1,6 +1,9 @@
 plugins {
   id 'com.android.application'
   id 'kotlin-android'
+
+  id 'kotlin-kapt'
+  id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -39,8 +42,8 @@ dependencies {
   implementation 'androidx.appcompat:appcompat:1.2.0'
   implementation 'com.google.android.material:material:1.2.1'
   implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-  implementation 'androidx.navigation:navigation-fragment:2.3.2'
-  implementation 'androidx.navigation:navigation-ui:2.3.2'
+  implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
+  implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
   implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
   implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
   implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
@@ -48,4 +51,14 @@ dependencies {
   testImplementation 'junit:junit:4.+'
   androidTestImplementation 'androidx.test.ext:junit:1.1.2'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+  //Retrofit
+  implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+  implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+  implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
+
+  //hilt
+  implementation "com.google.dagger:hilt-android:$hilt_version"
+  kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
 }
