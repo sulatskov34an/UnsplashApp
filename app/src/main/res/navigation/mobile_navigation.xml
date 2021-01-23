@@ -16,5 +16,15 @@
       android:id="@+id/navigation_profile"
       android:name="ru.sulatskov.unsplashapp.ui.profile.ProfileFragment"
       android:label="@string/title_profile"
-      tools:layout="@layout/fragment_profile" />
+      tools:layout="@layout/fragment_profile" >
+    <action android:id="@+id/action_to_auth" app:destination="@id/navigation_auth"/>
+  </fragment>
+
+  <fragment
+      android:id="@+id/navigation_auth"
+      android:name="ru.sulatskov.unsplashapp.ui.auth.OauthFragment"
+      android:label="@string/oauth"
+      tools:layout="@layout/fragment_oauth" />
+
+
 </navigation>

@@ -2,4 +2,6 @@
   <string name="app_name">UnsplashApp</string>
   <string name="title_home">Home</string>
   <string name="title_profile">Profile</string>
+    <string name="login">login</string>
+    <string name="oauth">Oauth</string>
 </resources>
