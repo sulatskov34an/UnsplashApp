@@ -15,11 +15,30 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.browser.customtabs.CustomTabsService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import ru.sulatskov.unsplashapp.common.AppConst
 import ru.sulatskov.unsplashapp.databinding.FragmentProfileBinding
+import ru.sulatskov.unsplashapp.network.ApiInterface
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class ProfileFragment : Fragment() {
+@AndroidEntryPoint
+class ProfileFragment : Fragment(), CoroutineScope {
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + Job()
 
     private lateinit var profileViewModel: ProfileViewModel
+
+    @Inject
+    lateinit var apiService: ApiInterface
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding
@@ -53,7 +72,19 @@ class ProfileFragment : Fragment() {
         intent?.data?.let { uri ->
             if (uri.authority.equals(unsplashAuthCallback)) {
                 uri.getQueryParameter("code")?.let { code ->
+                    launch{
+                        val retrofit = Retrofit.Builder()
+                            .baseUrl(AppConst.AUTH_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .client(
+                                OkHttpClient
+                                .Builder()
+                                .build())
+                            .build().create(ApiInterface::class.java)
 
+                        val result = retrofit.login(code = code)
+                        val tokken = result.accessToken
+                    }
                 }
             }
         }
@@ -166,7 +197,7 @@ class ProfileFragment : Fragment() {
 
     val loginUrl: String
         get() = "https://unsplash.com/oauth/authorize" +
-                "?client_id=${clientId}" +
+                "?client_id=${AppConst.ACCESS_KEY}" +
                 "&redirect_uri=resplash%3A%2F%2F${unsplashAuthCallback}" +
                 "&response_type=code" +
                 "&scope=public+read_user+write_user+read_photos+write_photos" +
@@ -174,9 +205,6 @@ class ProfileFragment : Fragment() {
 
     companion object {
         const val unsplashAuthCallback = "unsplash-auth-callback"
-        private const val redirectUri = "resplash://${unsplashAuthCallback}"
-        private const val grantType = "authorization_code"
-        private const val clientId = "Uqh1WK4CMFpDoW_SdPXNFLlqUB1nrHV1hDgdzcF-PDw"
         private const val STABLE_PACKAGE = "com.android.chrome"
         private const val BETA_PACKAGE = "com.chrome.beta"
         private const val DEV_PACKAGE = "com.chrome.dev"

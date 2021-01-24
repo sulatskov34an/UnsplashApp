@@ -25,3 +25,8 @@ class User(
 class ProfileImage(val medium: String = "")
 
 class Urls(val regular: String? = "")
+
+class AccessToken(
+    @SerializedName("access_token")
+    val accessToken: String = ""
+)
