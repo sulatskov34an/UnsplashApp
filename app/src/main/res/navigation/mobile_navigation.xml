@@ -22,7 +22,7 @@
 
   <fragment
       android:id="@+id/navigation_auth"
-      android:name="ru.sulatskov.unsplashapp.ui.auth.OauthFragment"
+      android:name="ru.sulatskov.unsplashapp.ui.auth.OauthActivity"
       android:label="@string/oauth"
       tools:layout="@layout/fragment_oauth" />
 
