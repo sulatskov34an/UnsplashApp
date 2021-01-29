@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Module(includes = [OkHttpClientModule::class])
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
+class MainNetworkModule {
 
     @Provides
     @Singleton

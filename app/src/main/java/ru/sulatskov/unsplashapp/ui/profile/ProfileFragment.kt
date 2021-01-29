@@ -22,21 +22,20 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import ru.sulatskov.unsplashapp.base.view.BaseFragment
+import ru.sulatskov.unsplashapp.base.viewmodel.Status
 import ru.sulatskov.unsplashapp.common.AppConst
 import ru.sulatskov.unsplashapp.databinding.FragmentProfileBinding
 import kotlin.coroutines.CoroutineContext
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment(), CoroutineScope {
-
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + Job()
+class ProfileFragment : BaseFragment() {
 
     private lateinit var profileViewModel: ProfileViewModel
-
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding
-
+    private var packageNameToUse: String? = null
+    
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,43 +54,57 @@ class ProfileFragment : Fragment(), CoroutineScope {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    private var packageNameToUse: String? = null
-
     fun onNewIntent(intent: Intent?) {
         intent?.data?.let { uri ->
             if (uri.authority.equals(unsplashAuthCallback)) {
                 uri.getQueryParameter("code")?.let { code ->
-                    launch{
-                        profileViewModel.login(code)
-                        profileViewModel.token.observe(viewLifecycleOwner, Observer {
-                            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-                        })
-                    }
+                    profileViewModel.login(code)
+                    profileViewModel.token.observe(viewLifecycleOwner, Observer {
+                        when (it.status) {
+                            Status.LOADING -> onProgress()
+                            Status.SUCCESS -> onSuccess(it.data)
+                            Status.ERROR -> onError()
+                        }
+                    })
                 }
             }
         }
     }
 
-    fun openCustomTab(
-        context: Context,
-        uri: Uri
-    ) {
+    override fun onProgress() {
+
+    }
+
+    override fun hideProgress() {
+
+    }
+
+    override fun <T> onSuccess(data: T?) {
+        Toast.makeText(context, data as String, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showPlaceholder() {
+    }
+
+    override fun hidePlaceholder() {
+    }
+
+    override fun setupToolbar() {
+    }
+
+    override fun destroyBinding() {
+        _binding = null
+    }
+
+
+    fun openCustomTab( context: Context, uri: Uri) {
         val customTabsIntent = CustomTabsIntent.Builder()
             .addDefaultShareMenuItem()
             .build()
         openCustomTab(context, customTabsIntent, uri)
     }
 
-    private fun openCustomTab(
-        context: Context,
-        customTabsIntent: CustomTabsIntent,
-        uri: Uri
-    ) {
+    private fun openCustomTab(context: Context, customTabsIntent: CustomTabsIntent, uri: Uri) {
         val packageName = getPackageNameToUse(context, uri)
 
         // If we cant find a package name, it means there's no browser that supports Chrome

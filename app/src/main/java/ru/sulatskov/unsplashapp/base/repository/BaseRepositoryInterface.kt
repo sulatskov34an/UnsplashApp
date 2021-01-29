@@ -1,0 +1,3 @@
+package ru.sulatskov.unsplashapp.base.repository
+
+interface BaseRepositoryInterface
