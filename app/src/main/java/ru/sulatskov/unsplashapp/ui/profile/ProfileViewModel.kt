@@ -16,13 +16,10 @@ import ru.sulatskov.unsplashapp.network.MainApiInterface
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel
-@Inject constructor(
-    private var loginApiInterface: LoginApiInterface
-) : BaseViewModel() {
+class ProfileViewModel @Inject constructor(private var loginApiInterface: LoginApiInterface) :
+    BaseViewModel() {
 
     private val _token = MutableLiveData<Event<String>>()
-
     val token: LiveData<Event<String>> = _token
 
     fun login(code: String) {
