@@ -8,7 +8,7 @@ import ru.sulatskov.unsplashapp.common.AppConst
 import ru.sulatskov.unsplashapp.network.dto.AccessToken
 import ru.sulatskov.unsplashapp.network.dto.Photo
 
-interface ApiInterface {
+interface MainApiInterface {
     @GET("photos")
     suspend fun getListPhotos(
         @Query("page") page: Int?,

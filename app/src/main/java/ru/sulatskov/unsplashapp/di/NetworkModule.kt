@@ -8,7 +8,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.sulatskov.unsplashapp.common.AppConst
-import ru.sulatskov.unsplashapp.network.ApiInterface
+import ru.sulatskov.unsplashapp.network.MainApiInterface
 import javax.inject.Singleton
 
 @Module(includes = [OkHttpClientModule::class])
@@ -17,7 +17,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideApi(retrofit: Retrofit) = retrofit.create(ApiInterface::class.java)
+    fun provideApi(retrofit: Retrofit): MainApiInterface = retrofit.create(MainApiInterface::class.java)
 
     @Provides
     @Singleton

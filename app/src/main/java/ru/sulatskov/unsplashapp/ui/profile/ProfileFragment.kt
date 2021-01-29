@@ -11,22 +11,19 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.browser.customtabs.CustomTabsService
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import ru.sulatskov.unsplashapp.common.AppConst
 import ru.sulatskov.unsplashapp.databinding.FragmentProfileBinding
-import ru.sulatskov.unsplashapp.network.ApiInterface
-import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 @AndroidEntryPoint
@@ -36,9 +33,6 @@ class ProfileFragment : Fragment(), CoroutineScope {
         get() = Dispatchers.Main + Job()
 
     private lateinit var profileViewModel: ProfileViewModel
-
-    @Inject
-    lateinit var apiService: ApiInterface
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding
@@ -73,17 +67,10 @@ class ProfileFragment : Fragment(), CoroutineScope {
             if (uri.authority.equals(unsplashAuthCallback)) {
                 uri.getQueryParameter("code")?.let { code ->
                     launch{
-                        val retrofit = Retrofit.Builder()
-                            .baseUrl(AppConst.AUTH_URL)
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .client(
-                                OkHttpClient
-                                .Builder()
-                                .build())
-                            .build().create(ApiInterface::class.java)
-
-                        val result = retrofit.login(code = code)
-                        val tokken = result.accessToken
+                        profileViewModel.login(code)
+                        profileViewModel.token.observe(viewLifecycleOwner, Observer {
+                            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                        })
                     }
                 }
             }
