@@ -16,9 +16,4 @@ object AppConst {
             "&response_type=code" +
             "&scope=public+read_user+write_user+read_photos+write_photos" +
             "+write_likes+write_followers+read_collections+write_collections"
-
-    const val STABLE_PACKAGE = "com.android.chrome"
-    const val BETA_PACKAGE = "com.chrome.beta"
-    const val DEV_PACKAGE = "com.chrome.dev"
-    const val LOCAL_PACKAGE = "com.google.android.apps.chrome"
 }
