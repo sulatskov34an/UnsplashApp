@@ -8,7 +8,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.sulatskov.unsplashapp.common.AppConst
-import ru.sulatskov.unsplashapp.network.MainApiInterface
+import ru.sulatskov.unsplashapp.model.network.MainApiInterface
 import javax.inject.Singleton
 
 @Module(includes = [OkHttpClientModule::class])

@@ -181,6 +181,7 @@ class OauthFragment: BaseFragment() {
     }
 
     override fun <T> onSuccess(data: T?) {
+        oauthViewModel.saveToken(data as? String)
         findNavController().navigate(R.id.action_to_profile)
     }
 

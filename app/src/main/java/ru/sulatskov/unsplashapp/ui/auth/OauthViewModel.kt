@@ -5,11 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ru.sulatskov.unsplashapp.base.viewmodel.BaseViewModel
 import ru.sulatskov.unsplashapp.base.viewmodel.Event
-import ru.sulatskov.unsplashapp.network.LoginApiInterface
+import ru.sulatskov.unsplashapp.model.network.LoginApiInterface
+import ru.sulatskov.unsplashapp.model.prefs.PrefsService
 import javax.inject.Inject
 
 @HiltViewModel
-class  OauthViewModel @Inject constructor(private var loginApiInterface: LoginApiInterface) :
+class OauthViewModel @Inject constructor(
+    private var loginApiInterface: LoginApiInterface,
+    private var prefsService: PrefsService
+) :
     BaseViewModel() {
 
     private val _token = MutableLiveData<Event<String>>()
@@ -17,5 +21,9 @@ class  OauthViewModel @Inject constructor(private var loginApiInterface: LoginAp
 
     fun login(code: String) {
         request(_token) { loginApiInterface.login(code).accessToken }
+    }
+
+    fun saveToken(token: String?) {
+        prefsService.accessToken = token
     }
 }

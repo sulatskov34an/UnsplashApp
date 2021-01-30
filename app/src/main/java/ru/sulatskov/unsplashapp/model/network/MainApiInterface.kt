@@ -1,12 +1,12 @@
-package ru.sulatskov.unsplashapp.network
+package ru.sulatskov.unsplashapp.model.network
 
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 import ru.sulatskov.unsplashapp.common.AppConst
-import ru.sulatskov.unsplashapp.network.dto.AccessToken
-import ru.sulatskov.unsplashapp.network.dto.Photo
+import ru.sulatskov.unsplashapp.model.network.dto.AccessToken
+import ru.sulatskov.unsplashapp.model.network.dto.Photo
 
 interface MainApiInterface {
     @GET("photos")

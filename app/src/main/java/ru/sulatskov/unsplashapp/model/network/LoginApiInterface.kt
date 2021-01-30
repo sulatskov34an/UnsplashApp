@@ -1,9 +1,9 @@
-package ru.sulatskov.unsplashapp.network
+package ru.sulatskov.unsplashapp.model.network
 
 import retrofit2.http.POST
 import retrofit2.http.Query
 import ru.sulatskov.unsplashapp.common.AppConst
-import ru.sulatskov.unsplashapp.network.dto.AccessToken
+import ru.sulatskov.unsplashapp.model.network.dto.AccessToken
 
 interface LoginApiInterface {
     @POST("oauth/token")

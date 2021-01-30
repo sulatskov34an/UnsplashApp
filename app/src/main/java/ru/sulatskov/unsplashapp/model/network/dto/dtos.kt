@@ -1,4 +1,4 @@
-package ru.sulatskov.unsplashapp.network.dto
+package ru.sulatskov.unsplashapp.model.network.dto
 
 import com.google.gson.annotations.SerializedName
 
