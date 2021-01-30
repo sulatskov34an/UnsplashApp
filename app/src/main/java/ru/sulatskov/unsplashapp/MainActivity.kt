@@ -4,15 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import ru.sulatskov.unsplashapp.ui.profile.ProfileFragment
+import ru.sulatskov.unsplashapp.ui.auth.OauthFragment
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
   override fun onNewIntent(intent: Intent?) {
     val navFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
     val fragment = navFragment?.childFragmentManager?.primaryNavigationFragment
-    (fragment as ProfileFragment).onNewIntent(intent)
+    (fragment as? OauthFragment)?.onNewIntent(intent)
     super.onNewIntent(intent)
   }
 

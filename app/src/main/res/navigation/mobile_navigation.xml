@@ -1,30 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
-  <fragment
-      android:id="@+id/navigation_home"
-      android:name="ru.sulatskov.unsplashapp.ui.home.HomeFragment"
-      android:label="@string/title_home"
-      tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="ru.sulatskov.unsplashapp.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
 
-  <fragment
-      android:id="@+id/navigation_profile"
-      android:name="ru.sulatskov.unsplashapp.ui.profile.ProfileFragment"
-      android:label="@string/title_profile"
-      tools:layout="@layout/fragment_profile" >
-    <action android:id="@+id/action_to_auth" app:destination="@id/navigation_auth"/>
-  </fragment>
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="ru.sulatskov.unsplashapp.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_to_oauth"
+            app:destination="@id/navigation_oauth" />
+    </fragment>
 
-  <fragment
-      android:id="@+id/navigation_auth"
-      android:name="ru.sulatskov.unsplashapp.ui.auth.OauthActivity"
-      android:label="@string/oauth"
-      tools:layout="@layout/fragment_oauth" />
-
+    <fragment
+        android:id="@+id/navigation_oauth"
+        android:name="ru.sulatskov.unsplashapp.ui.auth.OauthFragment"
+        android:label="@string/oauth"
+        tools:layout="@layout/fragment_oauth">
+        <action
+            android:id="@+id/action_to_profile"
+            app:destination="@id/navigation_profile" />
+    </fragment>
 
 </navigation>
