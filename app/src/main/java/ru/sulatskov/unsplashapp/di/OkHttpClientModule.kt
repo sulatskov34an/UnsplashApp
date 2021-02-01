@@ -28,26 +28,34 @@ class OkHttpClientModule {
 
     @Provides
     @Singleton
-    fun loggingInterceptor() = run {
-        val httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.apply {
-            httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        }
+    fun loggingInterceptor() = HttpLoggingInterceptor().apply {
+        this.level = HttpLoggingInterceptor.Level.BODY
     }
+
 
     @Provides
     @Singleton
-    fun interceptor(prefsService: PrefsService) = Interceptor {
-        try {
-            val request = it.request()
-            val newBuilder = request.newBuilder()
-            if (prefsService.accessToken.isNotEmpty()) {
-                newBuilder.header("Authorization", "Bearer ${prefsService.accessToken}")
-            }
-            val proceed = it.proceed(newBuilder.build())
-            proceed
-        } catch (e: Exception) {
-            it.proceed(it.request())
+    fun interceptor(prefsService: PrefsService) = Interceptor { chain: Interceptor.Chain ->
+        val newBuilder = chain.request().newBuilder()
+        if (prefsService.accessToken.isNotEmpty()) {
+            newBuilder.header("Authorization", "Bearer ${prefsService.accessToken}")
         }
+        val proceed = chain.proceed(newBuilder.build())
+        
+// refreshToken 
+//        if (!proceed.isSuccessful && proceed.code == 401) {
+//            val refreshResponse = api.refreshToken(prefsService.refreshToken).execute()
+//            if (refreshResponse.isSuccessful) {
+//                refreshResponse.body().apply {
+//                    prefsService.accessToken = result.accessToken.token
+//                    prefsService.refreshToken = result.refreshToken.token
+//                }
+//                if (prefsService.accessToken.isNotEmpty()) {
+//                    newBuilder.header("Authorization", "Bearer ${prefsService.accessToken}")
+//                }
+//                proceed = chain.proceed(newBuilder.build())
+//            }
+//        }
+        proceed
     }
 }

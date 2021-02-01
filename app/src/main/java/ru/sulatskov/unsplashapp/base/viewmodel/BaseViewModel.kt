@@ -23,6 +23,7 @@ abstract class BaseViewModel : ViewModel() {
                     liveData.postValue(Event.success(response))
                 }
             } catch (e: Exception) {
+                e.printStackTrace()
                 (e as? HttpException)?.code()?.let {
                     liveData.postValue(Event.error(it))
                 }
