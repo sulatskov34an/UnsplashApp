@@ -23,7 +23,6 @@ class OauthFragment: BaseFragment() {
     private lateinit var oauthViewModel: OauthViewModel
     private var _binding: FragmentOauthBinding? = null
     private val binding get() = _binding
-    private var packageNameToUse: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,7 +60,7 @@ class OauthFragment: BaseFragment() {
     }
 
     override fun <T> onSuccess(data: T?) {
-        oauthViewModel.saveToken(data as? String)
+        oauthViewModel.saveToken(data as String)
         findNavController().navigate(R.id.action_to_profile)
     }
 

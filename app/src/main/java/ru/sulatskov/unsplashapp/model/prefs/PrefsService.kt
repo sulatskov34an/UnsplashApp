@@ -10,8 +10,8 @@ class PrefsService(context: Context) {
         const val TOKEN_KEY = "token"
     }
 
-    var accessToken: String?
-        get() = prefs.getString(TOKEN_KEY, "")
+    var accessToken: String
+        get() = prefs.getString(TOKEN_KEY, "").toString()
         set(value) {
             prefs.edit {
                 putString(TOKEN_KEY, value)

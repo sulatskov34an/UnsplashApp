@@ -1,5 +1,6 @@
 package ru.sulatskov.unsplashapp.di
 
+import android.util.Log
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -7,6 +8,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import ru.sulatskov.unsplashapp.model.prefs.PrefsService
 import javax.inject.Singleton
 
 @Module
@@ -35,19 +37,17 @@ class OkHttpClientModule {
 
     @Provides
     @Singleton
-    fun interceptor() = Interceptor.invoke { chain ->
-        val newUrl = chain
-            .request()
-            .url
-            .newBuilder()
-            .build()
-
-        val request = chain
-            .request()
-            .newBuilder()
-            .url(newUrl)
-            .build()
-
-        return@invoke chain.proceed(request)
+    fun interceptor(prefsService: PrefsService) = Interceptor {
+        try {
+            val request = it.request()
+            val newBuilder = request.newBuilder()
+            if (prefsService.accessToken.isNotEmpty()) {
+                newBuilder.header("Authorization", "Bearer ${prefsService.accessToken}")
+            }
+            val proceed = it.proceed(newBuilder.build())
+            proceed
+        } catch (e: Exception) {
+            it.proceed(it.request())
+        }
     }
 }

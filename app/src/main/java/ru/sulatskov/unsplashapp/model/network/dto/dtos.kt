@@ -22,6 +22,14 @@ class User(
     val profileImage: ProfileImage = ProfileImage()
 )
 
+class UserProfile(
+    val username: String = "",
+    @SerializedName("first_name")
+    val firstName: String = "",
+    @SerializedName("last_name")
+    val lastName: String = ""
+)
+
 class ProfileImage(val medium: String = "")
 
 class Urls(val regular: String? = "")

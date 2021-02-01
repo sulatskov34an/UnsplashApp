@@ -23,7 +23,7 @@ class OauthViewModel @Inject constructor(
         request(_token) { loginApiInterface.login(code).accessToken }
     }
 
-    fun saveToken(token: String?) {
+    fun saveToken(token: String) {
         prefsService.accessToken = token
     }
 }

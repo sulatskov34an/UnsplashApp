@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.sulatskov.unsplashapp.R
 import ru.sulatskov.unsplashapp.base.view.BaseFragment
+import ru.sulatskov.unsplashapp.base.viewmodel.Status
 import ru.sulatskov.unsplashapp.databinding.FragmentProfileBinding
+import ru.sulatskov.unsplashapp.model.network.dto.UserProfile
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment() {
@@ -35,6 +38,14 @@ class ProfileFragment : BaseFragment() {
         if (!profileViewModel.hasToken()){
             findNavController().navigate(R.id.action_to_oauth)
         }
+        profileViewModel.getUser()
+        profileViewModel.user.observe(viewLifecycleOwner, Observer {
+            when (it.status) {
+                Status.LOADING -> onProgress()
+                Status.SUCCESS -> onSuccess(it.data)
+                Status.ERROR -> onError()
+            }
+        })
     }
 
     override fun onProgress() {
@@ -46,7 +57,7 @@ class ProfileFragment : BaseFragment() {
     }
 
     override fun <T> onSuccess(data: T?) {
-        Toast.makeText(context, data as String, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, (data as UserProfile).lastName, Toast.LENGTH_SHORT).show()
     }
 
     override fun showPlaceholder() {

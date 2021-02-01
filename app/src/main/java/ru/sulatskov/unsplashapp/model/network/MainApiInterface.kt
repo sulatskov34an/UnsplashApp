@@ -7,6 +7,8 @@ import retrofit2.http.Query
 import ru.sulatskov.unsplashapp.common.AppConst
 import ru.sulatskov.unsplashapp.model.network.dto.AccessToken
 import ru.sulatskov.unsplashapp.model.network.dto.Photo
+import ru.sulatskov.unsplashapp.model.network.dto.User
+import ru.sulatskov.unsplashapp.model.network.dto.UserProfile
 
 interface MainApiInterface {
     @GET("photos")
@@ -29,5 +31,8 @@ interface MainApiInterface {
         @Query("redirect_uri") redirectUri: String = AppConst.redirectUri,
         @Query("grant_type") grantType: String = AppConst.grantType,
     ): AccessToken
+
+    @GET("me")
+    suspend fun getUser(): UserProfile
 
 }
