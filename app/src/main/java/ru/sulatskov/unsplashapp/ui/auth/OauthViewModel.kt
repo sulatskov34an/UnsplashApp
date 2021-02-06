@@ -13,8 +13,7 @@ import javax.inject.Inject
 class OauthViewModel @Inject constructor(
     private var loginApiInterface: LoginApiInterface,
     private var prefsService: PrefsService
-) :
-    BaseViewModel() {
+) : BaseViewModel() {
 
     private val _token = MutableLiveData<Event<String>>()
     val token: LiveData<Event<String>> = _token

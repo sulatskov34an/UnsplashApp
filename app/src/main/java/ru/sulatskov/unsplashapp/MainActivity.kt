@@ -1,10 +1,15 @@
 package ru.sulatskov.unsplashapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -22,14 +27,9 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
+    setStatusBarColor(R.color.color_black)
     val navView: BottomNavigationView = findViewById(R.id.nav_view)
-
     navController = findNavController(R.id.nav_host_fragment)
-    // Passing each menu ID as a set of Ids because each
-    // menu should be considered as top level destinations.
-    val appBarConfiguration = AppBarConfiguration(setOf(
-        R.id.navigation_home, R.id.navigation_profile))
-    setupActionBarWithNavController(navController, appBarConfiguration)
     navView.setupWithNavController(navController)
   }
 
@@ -50,5 +50,13 @@ class MainActivity : AppCompatActivity() {
       view = View(this)
     }
     imm.hideSoftInputFromWindow(view.windowToken, 0)
+  }
+
+  @SuppressLint("ResourceType")
+  private fun setStatusBarColor(color: Int) {
+    val window: Window = this.window
+    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    window.statusBarColor = ContextCompat.getColor(this, color)
   }
 }
