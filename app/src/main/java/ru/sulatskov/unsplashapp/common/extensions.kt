@@ -7,11 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.google.android.material.snackbar.Snackbar
 
-interface ProgressManager {
-    fun showProgress()
-    fun hideProgress()
-}
-
 fun Fragment.toast(msg: String) {
     activity?.apply {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
@@ -20,7 +15,8 @@ fun Fragment.toast(msg: String) {
 
 fun Fragment.snackbar(msg: String) {
     view?.apply {
-        Snackbar.make(this, msg, Snackbar.LENGTH_LONG).show()    }
+        Snackbar.make(this, msg, Snackbar.LENGTH_LONG).show()
+    }
 }
 
 fun View.visible() {

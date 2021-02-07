@@ -17,7 +17,8 @@ class MainNetworkModule {
 
     @Provides
     @Singleton
-    fun provideApi(retrofit: Retrofit): MainApiInterface = retrofit.create(MainApiInterface::class.java)
+    fun provideApi(retrofit: Retrofit): MainApiInterface =
+        retrofit.create(MainApiInterface::class.java)
 
     @Provides
     @Singleton
@@ -35,5 +36,4 @@ class MainNetworkModule {
     @Provides
     @Singleton
     fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
-
 }

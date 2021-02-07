@@ -101,7 +101,8 @@ internal object CustomTabsPackageHelper {
      * @return All possible chrome package names that provide custom tabs feature.
      */
     val packages: List<String>
-        get() = listOf("",
+        get() = listOf(
+            "",
             STABLE_PACKAGE,
             BETA_PACKAGE,
             DEV_PACKAGE,

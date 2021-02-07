@@ -22,7 +22,7 @@ class AuthNetworkModule {
         .client(
             OkHttpClient
                 .Builder()
-                .build())
+                .build()
+        )
         .build().create(LoginApiInterface::class.java)
-
 }

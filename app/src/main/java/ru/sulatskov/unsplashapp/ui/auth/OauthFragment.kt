@@ -18,7 +18,7 @@ import ru.sulatskov.unsplashapp.databinding.FragmentOauthBinding
 import ru.sulatskov.unsplashapp.ui.auth.customtabs.CustomTabsHelper
 
 @AndroidEntryPoint
-class OauthFragment: BaseFragment() {
+class OauthFragment : BaseFragment() {
 
     private lateinit var oauthViewModel: OauthViewModel
     private var _binding: FragmentOauthBinding? = null

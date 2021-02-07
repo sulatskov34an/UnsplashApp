@@ -9,13 +9,8 @@ import retrofit2.HttpException
 
 abstract class BaseViewModel : ViewModel() {
 
-    fun <T> request(
-        liveData: MutableLiveData<Event<T>>,
-        request: suspend () -> T
-    ) {
-
+    fun <T> request(liveData: MutableLiveData<Event<T>>, request: suspend () -> T) {
         liveData.postValue(Event.loading())
-
         this.viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = request.invoke()

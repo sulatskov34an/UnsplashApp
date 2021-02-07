@@ -1,6 +1,5 @@
 package ru.sulatskov.unsplashapp.di
 
-import android.util.Log
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,7 +40,7 @@ class OkHttpClientModule {
             newBuilder.header("Authorization", "Bearer ${prefsService.accessToken}")
         }
         val proceed = chain.proceed(newBuilder.build())
-        
+
 // refreshToken 
 //        if (!proceed.isSuccessful && proceed.code == 401) {
 //            val refreshResponse = api.refreshToken(prefsService.refreshToken).execute()
