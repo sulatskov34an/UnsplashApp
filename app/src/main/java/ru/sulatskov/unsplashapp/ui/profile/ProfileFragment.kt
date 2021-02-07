@@ -27,15 +27,14 @@ class ProfileFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
+        profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
     override fun onResume() {
         super.onResume()
-        if (!profileViewModel.hasToken()){
+        if (!profileViewModel.hasToken()) {
             findNavController().navigate(R.id.action_to_oauth)
         }
         profileViewModel.getUser()
@@ -48,25 +47,8 @@ class ProfileFragment : BaseFragment() {
         })
     }
 
-    override fun onProgress() {
-
-    }
-
-    override fun hideProgress() {
-
-    }
-
     override fun <T> onSuccess(data: T?) {
         Toast.makeText(context, (data as UserProfile).lastName, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun showPlaceholder() {
-    }
-
-    override fun hidePlaceholder() {
-    }
-
-    override fun setupToolbar() {
     }
 
     override fun destroyBinding() {

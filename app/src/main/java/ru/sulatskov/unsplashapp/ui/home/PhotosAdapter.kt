@@ -1,7 +1,6 @@
 package ru.sulatskov.unsplashapp.ui.home
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -12,7 +11,8 @@ import ru.sulatskov.unsplashapp.common.gone
 import ru.sulatskov.unsplashapp.databinding.ItemPhotoCardBinding
 import ru.sulatskov.unsplashapp.model.network.dto.Photo
 
-class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.PhotoCardViewHolder>() {
+class PhotosAdapter(private val photoListClickListener: PhotoListClickListener) :
+    RecyclerView.Adapter<PhotosAdapter.PhotoCardViewHolder>() {
 
     private val list = mutableListOf<Photo>()
 
@@ -23,7 +23,7 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.PhotoCardViewHolder>() 
     }
 
     override fun onBindViewHolder(holder: PhotoCardViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(list[position], photoListClickListener)
     }
 
     override fun getItemCount() = list.size
@@ -37,7 +37,7 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.PhotoCardViewHolder>() 
     class PhotoCardViewHolder(private val binding: ItemPhotoCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(photo: Photo) {
+        fun bind(photo: Photo, photoListClickListener: PhotoListClickListener) {
             binding.avatar.apply {
                 val path = photo.user?.profileImage?.medium
                 Picasso.get()
@@ -60,6 +60,11 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.PhotoCardViewHolder>() 
             }
             binding.likedByUser.isActivated = photo.likedByUser
 
+            binding.likedByUser.setOnClickListener {
+                photoListClickListener.onLikeClick(!binding.likedByUser.isActivated, photo.id)
+                binding.likedByUser.isActivated = !binding.likedByUser.isActivated
+            }
+
             if (photo.likes > 0) {
                 binding.like.text = itemView.context.resources.getQuantityString(
                     R.plurals.likes,
@@ -80,4 +85,8 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.PhotoCardViewHolder>() 
 
         }
     }
+}
+
+interface PhotoListClickListener {
+    fun onLikeClick(isLike: Boolean, id: String?)
 }

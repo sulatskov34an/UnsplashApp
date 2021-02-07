@@ -16,6 +16,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomnavigation.LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED
 import dagger.hilt.android.AndroidEntryPoint
 import ru.sulatskov.unsplashapp.ui.auth.OauthFragment
 
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     setContentView(R.layout.activity_main)
     setStatusBarColor(R.color.color_black)
     val navView: BottomNavigationView = findViewById(R.id.nav_view)
+    navView.labelVisibilityMode = LABEL_VISIBILITY_UNLABELED
     navController = findNavController(R.id.nav_host_fragment)
     navView.setupWithNavController(navController)
   }

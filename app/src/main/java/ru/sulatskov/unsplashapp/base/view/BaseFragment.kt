@@ -9,9 +9,9 @@ import ru.sulatskov.unsplashapp.common.snackbar
 
 abstract class BaseFragment : Fragment(), BaseViewInterface {
 
-    abstract fun <T> onSuccess(data: T?)
+    protected open fun <T> onSuccess(data: T?) {}
 
-    open fun onError() {
+    protected open fun onError() {
         snackbar(getString(R.string.error_text))
         hideProgress()
         showPlaceholder()
@@ -22,11 +22,11 @@ abstract class BaseFragment : Fragment(), BaseViewInterface {
         setupToolbar()
     }
 
-    abstract fun showPlaceholder()
+    protected open fun showPlaceholder() {}
 
-    abstract fun hidePlaceholder()
+    protected open fun hidePlaceholder() {}
 
-    abstract fun setupToolbar()
+    protected open fun setupToolbar() {}
 
     abstract fun destroyBinding()
 
@@ -35,7 +35,11 @@ abstract class BaseFragment : Fragment(), BaseViewInterface {
         super.onDestroyView()
     }
 
-    fun hideKeyboard(){
+    protected open fun onProgress() {}
+
+    protected open fun hideProgress() {}
+
+    fun hideKeyboard() {
         (activity as? MainActivity)?.hideKeyboard()
     }
 }

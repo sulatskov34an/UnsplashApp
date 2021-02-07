@@ -29,8 +29,7 @@ class OauthFragment: BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        oauthViewModel =
-            ViewModelProvider(this).get(OauthViewModel::class.java)
+        oauthViewModel = ViewModelProvider(this).get(OauthViewModel::class.java)
         _binding = FragmentOauthBinding.inflate(inflater, container, false)
         return binding?.root
     }
@@ -64,27 +63,7 @@ class OauthFragment: BaseFragment() {
         findNavController().navigate(R.id.action_to_profile)
     }
 
-    override fun showPlaceholder() {
-
-    }
-
-    override fun hidePlaceholder() {
-
-    }
-
-    override fun setupToolbar() {
-
-    }
-
     override fun destroyBinding() {
         _binding = null
-    }
-
-    override fun onProgress() {
-
-    }
-
-    override fun hideProgress() {
-
     }
 }
