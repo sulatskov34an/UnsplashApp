@@ -8,6 +8,7 @@ import com.squareup.picasso.Picasso
 import ru.sulatskov.unsplashapp.R
 import ru.sulatskov.unsplashapp.common.TimeUtils
 import ru.sulatskov.unsplashapp.common.getProgressBar
+import ru.sulatskov.unsplashapp.common.gone
 import ru.sulatskov.unsplashapp.databinding.ItemPhotoCardBinding
 import ru.sulatskov.unsplashapp.model.network.dto.Photo
 
@@ -37,13 +38,25 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.PhotoCardViewHolder>() 
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(photo: Photo) {
-            binding.image?.apply {
+            binding.userName.text = photo.user?.username
+            photo.location?.title?.let {
+                binding.location.text = it
+            } ?: binding.location.gone()
+            binding.image.apply {
                 val path = photo.urls?.regular
                 Picasso.get()
                     .load(path)
                     .error(R.drawable.ic_error)
                     .placeholder(getProgressBar(itemView.context))
                     .into(binding.image)
+            }
+            binding.avatar.apply {
+                val path = photo.user?.profileImage?.medium
+                Picasso.get()
+                    .load(path)
+                    .error(R.drawable.ic_error)
+                    .placeholder(getProgressBar(itemView.context))
+                    .into(binding.avatar)
             }
         }
     }

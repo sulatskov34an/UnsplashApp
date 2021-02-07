@@ -14,6 +14,7 @@ interface MainApiInterface {
     @GET("photos")
     suspend fun getListPhotos(
         @Query("page") page: Int?,
+        @Query("per_page") perPage: Int? = 50,
         @Query("client_id") clientId: String = AppConst.ACCESS_KEY
     ): List<Photo>
 

@@ -10,7 +10,9 @@ class Photo(
     val createdAt: String? = "",
     val likes: Int? = 0,
     val location: Location? = Location(),
-    val user: User? = User()
+    val user: User? = User(),
+    @SerializedName("liked_by_user")
+    val likedByUser: Boolean
 )
 
 class Location(val title: String = "")
