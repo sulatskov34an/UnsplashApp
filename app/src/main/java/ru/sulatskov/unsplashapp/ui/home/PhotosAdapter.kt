@@ -38,6 +38,14 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.PhotoCardViewHolder>() 
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(photo: Photo) {
+            binding.avatar.apply {
+                val path = photo.user?.profileImage?.medium
+                Picasso.get()
+                    .load(path)
+                    .error(R.drawable.ic_error)
+                    .placeholder(getProgressBar(itemView.context))
+                    .into(binding.avatar)
+            }
             binding.userName.text = photo.user?.username
             photo.location?.title?.let {
                 binding.location.text = it
@@ -50,14 +58,26 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.PhotoCardViewHolder>() 
                     .placeholder(getProgressBar(itemView.context))
                     .into(binding.image)
             }
-            binding.avatar.apply {
-                val path = photo.user?.profileImage?.medium
-                Picasso.get()
-                    .load(path)
-                    .error(R.drawable.ic_error)
-                    .placeholder(getProgressBar(itemView.context))
-                    .into(binding.avatar)
+            binding.likedByUser.isActivated = photo.likedByUser
+
+            if (photo.likes > 0) {
+                binding.like.text = itemView.context.resources.getQuantityString(
+                    R.plurals.likes,
+                    photo.likes,
+                    photo.likes
+                )
+            } else {
+                binding.like.gone()
             }
+
+            photo.description?.let {
+                binding.description.text = it
+            } ?: binding.description.gone()
+
+            photo.createdAt?.let {
+                binding.createdAt.text = TimeUtils.getDate(itemView.context, it)
+            }
+
         }
     }
 }

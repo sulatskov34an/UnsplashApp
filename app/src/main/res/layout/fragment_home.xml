@@ -12,22 +12,30 @@
         android:orientation="vertical"
         tools:context=".ui.home.HomeFragment">
 
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_main_background">
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/color_main_background"
+            android:orientation="vertical">
 
             <TextView
                 style="@style/UnsplashToolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="6dp"
                 android:background="@color/color_main_background"
                 android:fontFamily="cursive"
                 android:text="@string/unsplash_text" />
-        </androidx.appcompat.widget.Toolbar>
 
+            <View
+                android:id="@+id/toolbar_shadow"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/sh_toolbar_shadow" />
+
+        </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"

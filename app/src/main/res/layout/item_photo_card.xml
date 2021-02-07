@@ -9,10 +9,10 @@
         android:id="@+id/avatar"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="16dp"
         app:civ_border_color="@color/color_border_color_civ"
         app:civ_border_width="1dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="6dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,20 +46,74 @@
     <ImageView
         android:id="@+id/context_menu"
         android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_height="16dp"
         android:layout_marginEnd="6dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/avatar"
+        android:src="@drawable/ic_menu"
         app:layout_constraintBottom_toBottomOf="@id/avatar"
-        android:src="@drawable/ic_menu" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/avatar" />
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
+        android:layout_height="250dp"
         android:layout_marginTop="6dp"
+        android:scaleType="centerCrop"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/avatar" />
+
+    <ImageView
+        android:id="@+id/liked_by_user"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:src="@drawable/selector_heart"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image" />
+
+    <ImageView
+        android:id="@+id/download"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp"
+        android:src="@drawable/ic_download"
+        app:layout_constraintBottom_toBottomOf="@id/liked_by_user"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/liked_by_user" />
+
+    <TextView
+        android:id="@+id/like"
+        style="@style/TextSmallBlackBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/liked_by_user"
+        tools:text="8 likes" />
+
+    <TextView
+        android:id="@+id/description"
+        style="@style/TitleSmallGray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/like"
+        tools:text="description" />
+
+    <TextView
+        android:id="@+id/created_at"
+        style="@style/TextSmallestGray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        tools:text="3 часа назад" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

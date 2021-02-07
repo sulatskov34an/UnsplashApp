@@ -8,7 +8,7 @@ class Photo(
     val description: String? = "",
     @SerializedName("created_at")
     val createdAt: String? = "",
-    val likes: Int? = 0,
+    val likes: Int = 0,
     val location: Location? = Location(),
     val user: User? = User(),
     @SerializedName("liked_by_user")
@@ -34,7 +34,7 @@ class UserProfile(
 
 class ProfileImage(val medium: String = "")
 
-class Urls(val regular: String? = "")
+class Urls(val regular: String? = "", val full: String? = "")
 
 class AccessToken(
     @SerializedName("access_token")
