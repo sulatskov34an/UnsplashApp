@@ -7,16 +7,32 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment">
 
+  <TextView
+      style="@style/UnsplashToolbar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:layout_marginStart="6dp"
+      android:background="@color/color_main_background"
+      android:fontFamily="cursive"
+      android:textSize="50sp"
+      android:text="@string/unsplash_text"
+      android:layout_marginBottom="50dp"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintBottom_toTopOf="@id/login"/>
+
   <Button
       android:id="@+id/login"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="8dp"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="8dp"
+      android:layout_marginEnd="16dp"
+      android:layout_marginStart="16dp"
       android:textAlignment="center"
       android:textSize="20sp"
       android:text="@string/login"
+      style="@style/UnslashButton"
+      android:background="@drawable/button_background"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

@@ -2,7 +2,7 @@
     <string name="app_name">UnsplashApp</string>
     <string name="title_home">Home</string>
     <string name="title_profile">Profile</string>
-    <string name="login">login</string>
+    <string name="login">Login</string>
     <string name="oauth">Oauth</string>
     <string name="error_text">Error internet connection</string>
     <string name="unsplash_text">Unsplash</string>
