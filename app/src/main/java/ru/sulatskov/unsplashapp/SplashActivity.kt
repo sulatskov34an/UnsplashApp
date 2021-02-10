@@ -10,6 +10,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.coroutines.*
+import ru.sulatskov.unsplashapp.common.setStatusBarColor
 import ru.sulatskov.unsplashapp.databinding.ActivitySplashBinding
 import java.lang.Runnable
 import kotlin.coroutines.CoroutineContext
@@ -26,6 +27,7 @@ class SplashActivity : AppCompatActivity(), CoroutineScope {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        setStatusBarColor(R.color.color_black_transparent50, this)
         val backgrounds = arrayOfNulls<Drawable>(3)
         backgrounds[0] = ContextCompat.getDrawable(this, R.drawable.gradient1)
         backgrounds[1] = ContextCompat.getDrawable(this, R.drawable.gradient2)
@@ -33,7 +35,7 @@ class SplashActivity : AppCompatActivity(), CoroutineScope {
         crossfade(binding.background, backgrounds, 10000)
 
         launch {
-            delay(4000L)
+            delay(5000L)
             val intent = Intent(this@SplashActivity, MainActivity::class.java)
             startActivity(intent)
         }

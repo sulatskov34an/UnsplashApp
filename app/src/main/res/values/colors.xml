@@ -21,6 +21,7 @@
   <color name="color_white_transparent90">#E6FFFFFF</color>
   <color name="color_white_transparent100">#FFFFFF</color>
   <color name="color_black_transparent85">#D9000000</color>
+  <color name="color_black_transparent50">#80000000</color>
   <color name="color_shimmer_placeholder">#DCDCDC</color>
     <color name="color_border_color_civ">#D5D5D5</color>
 </resources>

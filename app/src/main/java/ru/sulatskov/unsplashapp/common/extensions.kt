@@ -1,8 +1,13 @@
 package ru.sulatskov.unsplashapp.common
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.google.android.material.snackbar.Snackbar
@@ -34,4 +39,12 @@ fun getProgressBar(context: Context): CircularProgressDrawable {
     circularProgressDrawable.start()
 
     return circularProgressDrawable
+}
+
+@SuppressLint("ResourceType")
+fun setStatusBarColor(color: Int, activity: Activity) {
+    val window: Window = activity.window
+    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    window.statusBarColor = ContextCompat.getColor(activity.applicationContext, color)
 }
