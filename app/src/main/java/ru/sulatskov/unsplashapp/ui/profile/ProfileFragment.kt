@@ -34,15 +34,19 @@ class ProfileFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        if (!profileViewModel.hasToken()) {
-            findNavController().navigate(R.id.action_to_oauth)
-        }
-        profileViewModel.getUser()
-        profileViewModel.user.observe(viewLifecycleOwner, Observer {
-            when (it.status) {
-                Status.LOADING -> onProgress()
-                Status.SUCCESS -> onSuccess(it.data)
-                Status.ERROR -> onError()
+        profileViewModel.hasToken()
+        profileViewModel.hasToken.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                profileViewModel.getUser()
+                profileViewModel.user.observe(viewLifecycleOwner, Observer {
+                    when (it.status) {
+                        Status.LOADING -> onProgress()
+                        Status.SUCCESS -> onSuccess(it.data)
+                        Status.ERROR -> onError()
+                    }
+                })
+            } else {
+                findNavController().navigate(R.id.action_to_oauth)
             }
         })
     }

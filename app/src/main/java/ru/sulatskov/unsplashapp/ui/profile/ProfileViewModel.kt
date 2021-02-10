@@ -19,9 +19,14 @@ class ProfileViewModel @Inject constructor(
     private val _user = MutableLiveData<Event<UserProfile>>()
     val user: LiveData<Event<UserProfile>> = _user
 
+    private val _hasToken = MutableLiveData<Boolean>()
+    val hasToken: LiveData<Boolean> = _hasToken
+
     fun getUser() {
         request(_user) { mainApiInterface.getUser() }
     }
 
-    fun hasToken() = prefsService.accessToken.isNotEmpty()
+    fun hasToken(){
+        _hasToken.postValue(prefsService.accessToken.isNotEmpty())
+    }
 }

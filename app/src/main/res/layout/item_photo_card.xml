@@ -9,7 +9,7 @@
         android:id="@+id/avatar"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="6dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:civ_border_color="@color/color_border_color_civ"
         app:civ_border_width="1dp"
@@ -47,7 +47,7 @@
         android:id="@+id/context_menu"
         android:layout_width="20dp"
         android:layout_height="16dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginEnd="16dp"
         android:src="@drawable/ic_menu"
         app:layout_constraintBottom_toBottomOf="@id/avatar"
         app:layout_constraintRight_toRightOf="parent"
@@ -62,36 +62,44 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/avatar" />
 
-    <ImageView
-        android:id="@+id/liked_by_user"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="6dp"
-        android:src="@drawable/selector_heart"
+    <FrameLayout
+        android:id="@+id/liked_by_user_fl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="6dp"
+        android:paddingStart="16dp"
+        android:paddingBottom="2dp"
+        android:paddingRight="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image" />
+        app:layout_constraintTop_toBottomOf="@id/image">
+
+        <ImageView
+            android:id="@+id/liked_by_user"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/selector_heart" />
+
+    </FrameLayout>
 
     <ImageView
         android:id="@+id/download"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginTop="6dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginEnd="16dp"
         android:src="@drawable/ic_download"
-        app:layout_constraintBottom_toBottomOf="@id/liked_by_user"
+        app:layout_constraintBottom_toBottomOf="@id/liked_by_user_fl"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/liked_by_user" />
+        app:layout_constraintTop_toTopOf="@id/liked_by_user_fl" />
 
     <TextView
         android:id="@+id/like"
         style="@style/TextSmallBlackBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/liked_by_user"
+        app:layout_constraintTop_toBottomOf="@id/liked_by_user_fl"
         tools:text="8 likes" />
 
     <TextView
@@ -99,7 +107,7 @@
         style="@style/TitleSmallGray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="2dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/like"
@@ -110,7 +118,7 @@
         style="@style/TextSmallestGray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="2dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/description"

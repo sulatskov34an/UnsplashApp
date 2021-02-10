@@ -60,7 +60,7 @@ class PhotosAdapter(private val photoListClickListener: PhotoListClickListener) 
             }
             binding.likedByUser.isActivated = photo.likedByUser
 
-            binding.likedByUser.setOnClickListener {
+            binding.likedByUserFl.setOnClickListener {
                 photoListClickListener.onLikeClick(!binding.likedByUser.isActivated, photo.id)
                 binding.likedByUser.isActivated = !binding.likedByUser.isActivated
             }
